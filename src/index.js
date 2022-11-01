@@ -10,12 +10,12 @@ if (document.readyState !== "loading") {
 
 function initializeCode() {
   // document.getElementById("app").innerHTML = "<h1>Hello!</h1>";
-  for (let i = 0; i < 5; i++) {
-    createWikiItem();
-  }
+  // https://dog.ceo/api/breed/hound/images/random
+  let breeds = ["affenpinscher", "african", "airedale", "akita", "appenzeller"];
+  breeds.forEach((breed) => createWikiItem(breed));
 }
 
-function createWikiItem() {
+function createWikiItem(breed) {
   const container = document.createElement("div");
   container.setAttribute("class", "container");
   document.body.appendChild(container);
@@ -26,7 +26,7 @@ function createWikiItem() {
 
   const wiki_header = document.createElement("h1");
   wiki_header.setAttribute("class", "wiki-header");
-  wiki_header.innerHTML = "Breed X";
+  wiki_header.innerHTML = "Breed: " + breed;
   wiki_item.appendChild(wiki_header);
 
   let wiki_content = document.createElement("div");
@@ -44,6 +44,13 @@ function createWikiItem() {
 
   let img = document.createElement("img");
   img.setAttribute("class", "wiki-img");
-  img.setAttribute("src", "");
+  let url = `https://dog.ceo/api/breed/${breed}/images/random`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((result) => {
+      console.log(result);
+      img.src = result.message;
+    });
+  //img.alt = "Picture of " + breed;
   img_container.appendChild(img);
 }
