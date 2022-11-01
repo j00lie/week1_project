@@ -31,7 +31,7 @@ function createWikiItem() {
 
   let wiki_content = document.createElement("div");
   wiki_content.setAttribute("class", "wiki-content");
-  wiki_header.appendChild(wiki_content);
+  wiki_item.appendChild(wiki_content);
 
   let content_text = document.createElement("p");
   content_text.setAttribute("class", "wiki-content");
