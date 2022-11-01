@@ -34,7 +34,7 @@ function createWikiItem() {
   wiki_header.appendChild(wiki_content);
 
   let content_text = document.createElement("p");
-  content_text.setAttribute("class", "wiki-text");
+  content_text.setAttribute("class", "wiki-content");
   content_text.innerText = "Some text about this breed.";
   wiki_content.appendChild(content_text);
 
