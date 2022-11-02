@@ -33,14 +33,14 @@ function createWikiItem(breed) {
   wiki_content.setAttribute("class", "wiki-content");
   wiki_item.appendChild(wiki_content);
 
-  let content_text = document.createElement("p");
-  content_text.setAttribute("class", "wiki-content");
-  content_text.innerText = "Some text about this breed.";
-  wiki_content.appendChild(content_text);
-
   let img_container = document.createElement("div");
   img_container.setAttribute("class", "img-container");
   wiki_content.appendChild(img_container);
+
+  let content_text = document.createElement("p");
+  content_text.setAttribute("class", "wiki-text");
+  content_text.innerText = "Some text about this breed.";
+  wiki_content.appendChild(content_text);
 
   let img = document.createElement("img");
   img.setAttribute("class", "wiki-img");
