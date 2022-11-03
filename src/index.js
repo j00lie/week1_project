@@ -11,7 +11,7 @@ if (document.readyState !== "loading") {
 function initializeCode() {
   // document.getElementById("app").innerHTML = "<h1>Hello!</h1>";
   // https://dog.ceo/api/breed/hound/images/random
-  let breeds = ["affenpinscher", "african", "airedale", "akita", "appenzeller"];
+  let breeds = ["affenpinscher", "malamute", "rottweiler", "husky", "beagle"];
   breeds.forEach((breed) => createWikiItem(breed));
 }
 
@@ -26,7 +26,7 @@ function createWikiItem(breed) {
 
   const wiki_header = document.createElement("h1");
   wiki_header.setAttribute("class", "wiki-header");
-  wiki_header.innerHTML = "Breed: " + breed;
+  wiki_header.innerHTML = breed;
   wiki_item.appendChild(wiki_header);
 
   let wiki_content = document.createElement("div");
@@ -39,7 +39,10 @@ function createWikiItem(breed) {
 
   let content_text = document.createElement("p");
   content_text.setAttribute("class", "wiki-text");
-  content_text.innerText = "Some text about this breed.";
+  const promise = getSummary(breed);
+  promise.then((res) => {
+    content_text.innerText = res.extract;
+  });
   wiki_content.appendChild(content_text);
 
   let img = document.createElement("img");
@@ -53,4 +56,19 @@ function createWikiItem(breed) {
     });
   //img.alt = "Picture of " + breed;
   img_container.appendChild(img);
+}
+
+async function getSummary(breed) {
+  let url = `https://en.wikipedia.org/api/rest_v1/page/summary/${breed}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(`Could not get products: ${error}`);
+  }
 }

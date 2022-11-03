@@ -22,6 +22,9 @@ body {
 .wiki-header {
   text-align: center;
 }
+.wiki-header::first-letter {
+  text-transform: uppercase;
+}
 
 .wiki-text {
   text-align: justify;
